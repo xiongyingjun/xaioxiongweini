@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+//    id 'com.android.library'
+    id 'com.chaquo.python'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+    defaultConfig {
+        applicationId "com.hyit.smart"
+        minSdkVersion 24
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // 指定abi，如需在模拟器调试，增加"x86"，否则指定"armeabi-v7a"即可
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+        python {
+            buildPython "C:/Users/A/anaconda3/python.exe"
+            // ......
+            pip {
+                install "Beautifulsoup4"
+                install "requests"
+                install "numpy"
+                install "scipy"
+                install "exifread"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.hjq:xxpermissions:10.6'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+}
